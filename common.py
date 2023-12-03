@@ -13,6 +13,14 @@ def read_lines(path: Path) -> Iterator[str]:
             yield line.rstrip()
 
 
+def product(it: Iterable[int]) -> int:
+    start = 1
+    for i in it:
+        start *= i
+
+    return start
+
+
 def first[T](it: Iterable[T], /) -> T:
     """
     >>> first([1, 2, 3])
@@ -61,4 +69,4 @@ def collect[T: Iterable, V, **P](
 
 def collect_sum[**P](fn: Callable[P, Iterable[int]]) -> Callable[P, int]:
     """Common use case that confuses pylance"""
-    return Callable[P, int], collect(sum)(fn)  # type: ignore
+    return collect(sum)(fn)  # type: ignore
